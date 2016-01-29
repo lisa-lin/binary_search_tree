@@ -28,9 +28,9 @@ def add(value, root)
 	end
 end
 
-# script to test run build_tree
+# script to test build_tree
 array = [9, 8, 3, 10, 1, 6]
-build_tree(array)
+tree = build_tree(array)
 
 def breadth_first_search(target, root)
 	queue = []
@@ -46,8 +46,8 @@ def breadth_first_search(target, root)
 	nil
 end
 
-# script to test run BFS
-puts breadth_first_search(6, build_tree(array)).value
+# script to test BFS
+#puts breadth_first_search(9, tree).value
 
 # implemented with a stack
 def depth_first_search(target, root)
@@ -55,8 +55,8 @@ def depth_first_search(target, root)
 	element = root
 	return element if element.value == target
 	loop do
-		stack << element.left if !element.left.nil?
 		stack << element.right if !element.right.nil?
+		stack << element.left if !element.left.nil?
 		element = stack.pop
 		return element if element.value == target
 		break if stack.empty?
@@ -64,13 +64,18 @@ def depth_first_search(target, root)
 	nil
 end
 
-# script to test run DFS
-puts depth_first_search(6, build_tree(array)).value
+# script to test DFS
+#puts depth_first_search(1, tree).value
 
-=begin
 # runs a depth first search recursively
-def dfs_rec
-	# instead of stack, use a recursive method
-	# look at tips
+def dfs_rec(target, node)
+	return node if node.value == target
+	search_left = dfs_rec(target, node.left) if !node.left.nil?
+	return search_left if search_left
+	search_right = dfs_rec(target, node.right) if !node.right.nil?
+	return search_right if search_right
+	nil
 end
-=end
+
+#script to test dfs_rec
+puts dfs_rec(1, tree).value

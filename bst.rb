@@ -47,7 +47,7 @@ def breadth_first_search(target, root)
 end
 
 # script to test BFS
-#puts breadth_first_search(9, tree).value
+puts breadth_first_search(9, tree).value
 
 # implemented with a stack
 def depth_first_search(target, root)
@@ -65,7 +65,7 @@ def depth_first_search(target, root)
 end
 
 # script to test DFS
-#puts depth_first_search(1, tree).value
+puts depth_first_search(1, tree).value
 
 # runs a depth first search recursively
 def dfs_rec(target, node)

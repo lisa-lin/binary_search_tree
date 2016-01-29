@@ -11,6 +11,7 @@ def build_tree(array)
 	array.each do |number|
 		add(number, root)
 	end
+	return root
 end
 
 def add(value, root)
@@ -28,16 +29,27 @@ def add(value, root)
 end
 
 # script to test run build_tree
-array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+array = [9, 8, 3, 10, 1, 6]
 build_tree(array)
 
-=begin
-def breadth_first_search
-	# uses BFS to return node at which target value is located
-	# use array acting as a queue to keep track of child nodes that you have yet to search and to add new ones to the list
-	# if target node value is not located, return nil
+def breadth_first_search(target, root)
+	queue = []
+	element = root
+	return element if element.value == target
+	loop do
+		queue << element.left if !element.left.nil?		
+		queue << element.right if !element.right.nil?	
+		element = queue.shift							
+		return element if element.value == target		
+		break if queue.empty?
+	end
 end
 
+# script to test run BFS
+puts breadth_first_search(6, build_tree(array)).value
+
+=begin
+# implemented with a stack
 def depth_first_search
 	# uses DFS 
 	# use array acting as a stack

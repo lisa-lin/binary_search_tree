@@ -7,7 +7,7 @@ class Node
 end
 
 def build_tree(array)
-	root = Node.new(array.shift) if array.length > 0
+	root = Node.new(array.shift) if !array.empty?
 	array.each do |number|
 		add(number, root)
 	end
@@ -43,18 +43,32 @@ def breadth_first_search(target, root)
 		return element if element.value == target		
 		break if queue.empty?
 	end
+	nil
 end
 
 # script to test run BFS
 puts breadth_first_search(6, build_tree(array)).value
 
-=begin
 # implemented with a stack
-def depth_first_search
-	# uses DFS 
-	# use array acting as a stack
+def depth_first_search(target, root)
+	stack = []
+	element = root
+	return element if element.value == target
+	loop do
+		stack << element.left if !element.left.nil?
+		stack << element.right if !element.right.nil?
+		element = stack.pop
+		return element if element.value == target
+		break if stack.empty?
+	end
+	nil
 end
 
+# script to test run DFS
+puts depth_first_search(6, build_tree(array)).value
+
+=begin
+# runs a depth first search recursively
 def dfs_rec
 	# instead of stack, use a recursive method
 	# look at tips
